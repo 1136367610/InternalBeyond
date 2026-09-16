@@ -1,168 +1,214 @@
-# InternalBeyond-Mobile（IB-Mobile）（IB机）
+# Internal Beyond（IB）
 
-Internal Beyond 的移动端同源版本：一个离线运行的单文件个人网站应用项目，旨于维系情感的连续性。
+一个离线运行的单文件个人网站式前端项目，旨于维系情感的连续性。
 
-该项目包含15个核心功能模块、内置的共读间、一个可安装的桌面 APP（观影室）与一位内置小助手（水水），以及2套视觉主题，支持同时对接多个 AI 模型。
+该项目包含14个核心功能模块与两套视觉主题，支持同时对接多个 AI 模型。
 
-所有数据储存在本地浏览器，不依赖任何网络服务器；与电脑端 Internal Beyond 使用同一套备份文件互相导入导出。
+所有数据储存在本地，不依赖任何网络服务器。
 
-个人名片、锁屏、壁纸、气泡与桌面布局均可自定义，用户数据支持一键导出与导入。
+个人资料、角色立绘、系统提示词等均可自定义，用户数据支持一键导出与导入。
 
-> 🌏 **桌面版 / InternalBeyond**: [InternalBeyond](https://github.com/Sui-IB/InternalBeyond)
+**本项目永久免费开源。**
 
-<!-- 宣传图：上传仓库后，把 Issue/PR 附件生成的图片链接替换到下一行 -->
-<!-- <img alt="InternalBeyond Mobile" src="在这里粘贴 GitHub attachments 图片链接" /> -->
+> 🌏 **手机版 / IB-Mobile**: [InternalBeyond-Mobile](https://github.com/Sui-IB/InternalBeyond-Mobile)
+> 
+> 🌏 **观影室** ：以外置 DLC 形式在V2.7.0版本单独发布。（[InternalBeyond-Cinema](https://github.com/Sui-IB/InternalBeyond-Cinema)）。
+
+<img width="2500" height="1239" alt="d840d23451506fdf34cf1015d1109a10" src="https://github.com/user-attachments/assets/a0bfd59d-f7d9-4e9e-8b26-58f6b0361a68" />
 
 ---
 
-## ✦ 开始使用
+## ✦ 开始游戏
 
 1. 下载本仓库（点击上方绿色 **Code** → **Download ZIP**）
-2. 解压后保持 `index.html` 与 `apps/` 文件夹在同一目录，用手机或电脑浏览器打开 `index.html`（推荐 Chrome）
-3. 进入 **API** 页面，添加你的 AI API 密钥
+2. 解压后，用浏览器打开 `InternalBeyond.html`
+3. 进入 **API Settings** 页面，添加你的 AI API 密钥
 4. 开始使用
 
-直接打开本地文件即可使用全部离线功能；要把它安装成一个真正的 App（主屏图标、全屏、离线缓存、系统通知），请看下方 **PWA 部署与安装**。AI 对话、联网搜索、GitHub 等在线功能需要联网调用 API。
+无需联网也能使用基础功能（日志、换装、主题切换、音乐播放等）。AI 相关功能需要联网调用 API。
 
 ## ✦ 功能一览
 
 | 模块 | 说明 |
 |------|------|
-| **Home** | 伪 iOS 主屏三面板：Desk 分页桌面（应用矩阵 + 月历 / 便笺 / 日程 / 音乐 / 相遇卡挂件与装饰小组件，长按拖动排序、自动装页）、Space 液态玻璃个人名片（封面 / 头像 / 简介 / 作品集，可按主题分设两套素材）、Circle AI 名片（头像 / 背景 / 签名 + Auto Memory 档案） |
-| **Lock** | iOS 式指滑锁屏 — 自适应取色的液态玻璃时刻、3×3 图案锁与密保问答、自定义壁纸；配置只存本机 |
-| **Chat** | 多端口 AI 实时对话 — 好友与群聊、话题频道、思考链、流式回复、附件与图像生成、语音消息（转写）与 TA 的语音条（含语气标注）、联网搜索、操作卡片、选项卡、引用 / 收藏夹 / 封档 / 批量选择、对话摘要、生成记忆 |
-| **Call** | 语音与视频通话 — 语音识别转写 + 逐句朗读 + 声学语气参考 + 通话心跳 + 视频直播间 + 弹幕 + 礼物系统 + 来电 + 群语音 / 群视频（导演模式）+ Wallet Card |
-| **Circle** | InternetBeyond 社交圈 — 你与已授权的 AI 互发动态、评论、回复与转发，逐条可见范围，两端同一个圈子 |
-| **Calendar** | 日历 App 与月历挂件 — 纪念日 / 生日 / 计划 / 备忘，重复规则，AI 读取临近日程、聊天中自然提起并留便笺，可授权 AI 直接写日历 |
-| **Blog** | 日志 / 密码日记本 / 分类区（自定义分类与筛选） / AI 留言与段落批注 / 阅读视图 / 可授权 AI 写入日志；**共读间**常驻其中 |
-| **Letters** | Beyond 邮局 — 异步通信，TA 读取你的资料后写信投递，火漆一点即拆 |
-| **Memory** | 长期情感记忆库 — 情感坐标 + 自然衰减 + 按关键词截取窗口的上下文自动注入；**Auto Memory** 为每个 AI 独立维护的认知档案（六分类、三级优先）；**记忆总结**从一段时间的材料里提炼档案条目（材料过长自动分两阶段：先分离素材卡片再铸型；抽屉里有进度卡、可停止、可翻看压缩前的素材与原始材料） |
-| **Music** | 全屏黑胶听歌界面 — 唱臂落盘、封面糊化为背景、逐句滚动歌词（.lrc / .srt / .vtt）、播放队列；**一起听**：邀请一位 AI 共享正在播放并累计时长；**网易云音乐模式**：登录自己的账号听歌单 / 红心 / 每日推荐 / 私人 FM / 听歌排行，AI 可按授权点歌、切歌单、红心、管理歌单（需自建跨域中转）；**QQ 音乐模式**：微信扫码 / QQ 扫码 / 粘贴凭证登录，我喜欢 / 自建与收藏的歌单 / 猜你喜欢 / 雷达 / 榜单 / 搜歌，官方接口允许网页直连、不需要中转（只有扫码登录需要）；**迷你播放器**：离开听歌界面后留一枚可拖动的小唱机（封面盘 · 唱臂 · 曲名 · 歌手 · 当前歌词） |
-| **Coread** | 共读间 — 把一篇日志当一本书，选一位 AI 读到哪聊到哪；聊天落在独立的「共读 · 书名」频道里，TA 只读到你此刻这一页 |
-| **Cinema** | 观影室 — 唯一的独立桌面 APP（`apps/ib-app-cinema.js`），Desk「应用」里安装；选一段本机视频（可配字幕）与一位 AI 一起看，字幕 / 画面帧 / 留影随每句话附给 TA，弹幕、倍速、全屏 |
-| **Helper** | 小助手水水 — GUIDE 页右上「?」打开；问它功能在哪、怎么用，按说明书正文回答；让它改设置（含全局与每位好友的独立项），直接改并逐条回显、可撤销；「缓存探针」「图片探针」看提示缓存命中与带图请求去向 |
-| **ICode** | 你与 AI 共用的文件工作区 — 项目分组、AI 读写 / 局部改写、操作确认或自动模式、精细检索工具、DOCX / PDF / XLSX 文档生成；**GitHub 分区**：PAT 直连、仓库浏览、导入工作区、一键推回 |
-| **Visual** | 视觉个性化 — 全站与聊天背景、全站色调、字号与投影、气泡材质、桌面挂件材质与尺寸、装饰小组件、更多绑定项，4 个方案槽一键回切；**Bubble Lab**（气泡实验室）：与 AI 对话式设计专属聊天气泡 |
-| **API** | 多端口配置中心 — 独立配置（昵称 / 关系 / 提示词 / 逐项权限 / 接口预设）、全局设置（语音通话系统 / 记忆系统 / 输出与续写 / 进阶指令）、工具（语音转写 / 图像生成 / AI付 / PWA 预留）、Presence 定时推送与勿扰 |
-| **DIY** | 外部工具（HTTP 接口）、蓝牙与 MCP 服务器接入，支持调用前确认 |
-| **Data** | 一键备份 — 全站导出 / 导入 JSON、聊天记录管理、Token 用量仪表盘、存储总览 |
+| **Room** | 像素互动房间（1672×941），含 Sui 对话、茶歇、互动故事、塔罗占卜、换装、休息六个子模块 |
+| **Chat** | 多端口 AI 实时对话 — 浮动面板 + 全屏 + 群聊 + 图像生成 + 附件处理 + Token 仪表盘 |
+| **Call** | 语音与视频通话 — 悬浮窗三合一（联系人 / 全局配置 / 通话面），语音识别转写 + 逐句朗读 + 声学语气参考 + 视频直播间 + 弹幕 + 礼物系统 + 来电 |
+| **Circle** | InternetBeyond 社交圈 — 用户与 AI 共同发布 / 评论 / 回复 / 转发动态，含好友资料页、可见范围、搜索、配图与定位 |
+| **Calendar** | AI 日历 — 悬浮小窗 + 挂历视窗，纪念日 / 生日 / 计划 / 记录，月相节气与传统节日，AI 读取临近日程、聊天中提起并留便笺 |
+| **Blog** | 日志 / 密码日记本 / 评论 / 批注 / 自定义剧本 / 共读学习室 |
+| **Letters** | AI 书信 — 异步通信，AI 读取你的资料后写回信 |
+| **Memory** | 长期情感记忆库 — 星图可视化 + 自然衰减 + API 上下文自动注入 + Auto Memory（AI 自主记忆） |
+| **Music** | 本地音乐播放器 + 48 条频率可视化波形 |
+| **Profile** | 液态玻璃风格个人名片 — 头像 + 简介 + 作品集 |
+| **API** | 多端口配置中心 — 最多 30 个独立 API（归档区 60），各有昵称、关系与提示词 |
+| **ICode** | AI 代码工作区 — 文件管理 + 预览 + 内联编辑 + 搜索定位 + 脚本沙箱运行 + 文档生成（DOCX / PDF / XLSX） |
+| **DIY** | 自定义透明立绘、占卜桌布、外部工具、MCP 服务器、Internal Bridge、沙箱扩展与文件解析库 |
+| **Data** | 一键备份（全站导出 / 导入 JSON）、Token 用量仪表盘、分类器拦截后的回退 |
+| **Cinema**（DLC） | 观影室 — 外置 DLC，单独下载 `IB-Cinema.js` 放到 `DLC/` 目录即出现在导航栏；与识图的 AI 一起看本机视频：每句附此刻一帧、字幕随消息、前情梗概、胶片时间轴（留影 / Talk / 梗概），点一格弹出那一刻的截图与两人对话 |
 
 ## ✦ 主题系统
 
-点击顶栏水滴按钮切换：
+<img width="1431" height="714" alt="QQ_1785873557359" src="https://github.com/user-attachments/assets/c0ab7e92-3d74-4ae4-a522-02f8bf68e3cc" />
 
-- **Internal** — 明亮模式。
-- **Infernal** — 暗色模式。部分界面文案与彩蛋会随主题切换。
+
+点击导航栏水滴按钮切换：
+
+- **Internal** — 明亮模式。Room 中呈现白天场景（棱镜彩虹光影、天气效果与浮动光斑）。
+- **Infernal** — 暗色模式。Room 中呈现夜晚场景（月光、烛火与柔和暖光效果）。
 
 两种模式都叫 "IB"。改变的只是方向——向内，或向深处。两个方向都通往**边界之外**。
 
+背景图片以交叉溶解过渡，首页标题淡出重写，雨效果和界面色调同步变化。
+
 ## ✦ 模块详情
 
-### Home — 主页与桌面
 
-Desk / Space / Circle 三面板经底栏切换，设置从第四格进入。Desk 应用矩阵与挂件长按拖动排序，显示与隐藏在设置中统一管理；Beyond（社交圈）、Visual（视觉页）、Music（听歌界面）与日历 App 均从 Desk 进入。Space 名片的个人简介会作为上下文发给所有 AI（可设仅自己可见），作品集三图仅本机展示、不发送。
+<img width="1659" height="850" alt="QQ_1785874302357" src="https://github.com/user-attachments/assets/bc8465e0-f7f4-40d2-9187-f4c5c8d39717" />
+<img width="1430" height="904" alt="QQ_1785873589697" src="https://github.com/user-attachments/assets/2d8b4713-ec9e-4667-bd2a-bd74e2c535a7" />
 
-### Lock — 锁屏
 
-默认开启，启动先进锁屏：挂锁与欢迎语、居中大字时钟、上滑解锁。时刻字面自适应壁纸取色；设置图案后上滑唤出 3×3 图案盘，忘记图案走密保问答。锁屏配置只存手机端本机，电脑端不读不写——它防的是顺手翻看，不能替代设备锁。
+### Room — 像素互动空间
+
+可通过导航栏进入全屏模式，或通过屏幕右侧标签打开浮动面板（支持缩放与拖拽）。浮动面板支持 Mini 小窗模式——缩成可拖拽的小窗悬浮于屏幕角落，适合在浏览其他页面时让 Sui 挂在一旁陪伴。
+
+- **Sui**：与房间主人对话，可启动游戏引导（Tour）。
+- **Tea**：情感对话空间。饮品 × 甜品正交组合 25 种独特氛围，基于依恋理论、多迷走神经理论、自我决定论设计。对话默认存至密码日记本，最长 52 轮。
+- **Story**：AI 分支叙事引擎。5 种类型 + 可调恐怖度 + 自定义剧本。12-16 轮剧情，含 3 个普通结局和 1 个隐藏结局。
+- **Tarot**：78 张韦特塔罗牌，5 种牌阵 + 可选指引牌 + AI 实时解读。全程操作记录可存档。
+- **Wardrobe**：6 套服装即时切换。
+- **Sleep**：角色躺下休息，点击唤醒。
+
 
 ### Chat — 实时对话
 
-每个已配置的 API 自动成为一位好友。附件支持图片（至多 4 张，自动压缩）与文本类文件；语音消息按住话筒录音、上滑取消，配置转写接口后自动附文字稿。AI 的每步动作（文件读写、外部工具、联网搜索、记忆写入、日历、社交圈、写入日志）都渲染为可折叠操作卡。长按消息可收藏：收藏夹按好友分开存放，每条是一张纸，语音可回听、图片照显示、长文折起；配置了语音条的 TA 会在合适的消息末尾附一段可点播的朗读，可选外语版。话题频道相互隔离、可单独控制记忆注入；对话摘要自动压缩旧消息保持长对话连贯；Select 模式支持批量删除、封档线、按选中消息生成记忆与「移到新频道」（把选中的一段对话整体搬进新的话题频道）。群聊成员依次以各自身份发言，静默成员被 @ 才参与，与电脑版共用数据；群聊可发起群语音 / 群视频通话，「导演模式」由一位 TA 编排发言顺序。
+浮动面板与全屏模式。好友列表由 API 配置自动生成，支持群聊与话题频道。思考链显示、消息删除、历史搜索、日历视图。可一键生成记忆到 Memory。
+
+- **话题频道**：每个好友下可新建多个话题频道，各频道独立聊天记录。频道的聊天记录不会被 Letters、Blog 评论等模块读取。
+- **对话摘要**：开启后旧消息自动压缩为摘要注入上下文，保持长对话的连贯性。
+- **图像生成**：每个 API 可独立开启。开启后 AI 可在对话中生成图片，图片直接显示在聊天里并自动存入 ICode。仅 OpenAI 兼容与 Gemini 接口支持。
+- **Token 仪表盘**：汇总用量，含缓存命中率、模型明细、费用估算。支持按时间段查看和清除。
+- **提示缓存（Prompt Caching）**：自动优化缓存命中率以降低输入费用，默认开启。支持长效缓存（1 小时 TTL，仅 Anthropic 官方 API）。
+- **联网搜索与选项卡**：API 设置中可开启联网搜索；选项卡开启后，AI 提问时可给出候选答案，以独立卡片显示在输入框上方。
+- **Select / 封档**：选择模式支持批量删除、仅用选中消息生成记忆，并可设置「封档线」让较早记录不再发送给 API。
+- **语音消息**：支持直接录音发送，并在本地分析语速、音量、停顿与语调等声学特征，随消息保存但不显示在界面上。
+
+
+<img width="959" height="574" alt="QQ_1785874438803" src="https://github.com/user-attachments/assets/62e4113c-8061-4ca8-946f-d05f80d6808c" />
+
 
 ### Call — 语音与视频通话
 
-从聊天抽屉「操作」或 API 页工具区进入通话设置；每位 AI 的通话配置可跟随全局或单独定制。
+从右下坞的 Call 图标或聊天附件菜单进入，悬浮窗包含联系人列表、全局配置与通话面三个面板。每位联系人的卡上可单独开「语音条」：TA 在合适的消息末尾附一枚可点播的语音条（原声读消息原文，或选英 / 日 / 韩版——气泡照常中文，点心形看原文），声音沿用通话里给 TA 配的那套。
 
 **语音通话**
 
-- 你的话由语音识别实时转写后发给 TA，TA 的回复逐句朗读（系统音色或云端音色，支持 SiliconFlow / OpenAI / 阿里云百炼 / ElevenLabs / MiniMax / Azure / 自建网关），支持打断、静音、通话中打字。
+- 你的话由浏览器语音识别实时转写后发给 TA，TA 的回复逐句朗读（系统语音或云端音色，支持 SiliconFlow / OpenAI / 阿里云百炼 / ElevenLabs / MiniMax / Azure / 自建网关）。
+- 支持打断（点头像、声波或打断钮）、静音、通话中打字（对话框文字直接并入通话链，TA 正在回话时暂存、回合结束自动补发）。
 - 声学语气参考：本机对每句话的音频做即时声学摘要（情绪 / 语速 / 音量 / 语调），以自然语句随转写一并发给模型。
-- 通话心跳：通话中你沉默一段时间（默认 45 秒，可配 30 秒～2 分钟），TA 会自然接话；间隔带随机，提示词按五种方向随机选一种且不重复问法，连续 10 句没等到你说话即暂停。
-- 语气标注：通话独立配置里可为每位 TA 开启语气，TA 的每句回复在文字稿与语音条上标注情绪语气（八种，引擎自动映射），对话与面板显示时标记自动清除。
+- 未配置语音识别接口时自动切为打字模式。
+- 语音通话中可收成药丸形小条（头像 + 计时 + 静音/挂断/展开），可拖拽。
 - 外语模式下字幕双行显示（外语原句 + 中文翻译）。
 
 **视频通话**
 
-- 从聊天抽屉「操作」→「Video Call 视频通话」进入（仅 1 对 1）。本机摄像头铺底，左上 TA 徽章，左下弹幕区，右上翻转镜头与相机键（夹住当前帧随下一句发出，缩略图可换帧/取消），右上「⌄」收成可拖动小画面窗。
-- 图像抓取频率四档（关闭 / 每轮一帧 / 每 30 秒 / 每 60 秒），画质三档（l / m / h）。
+- 进入后窗体放大为直播间式长方形，本机摄像头画面铺底。左上 TA 玻璃徽章（头像 + 名字 + 计时，点击打断），右上液态玻璃挂断键与相机键（夹住当前画面随下一句发出）。
+- 图像抓取频率四档（关闭 / 每轮一帧 / 每 30 秒 / 每 60 秒），画质三档（384 / 512 / 768 像素）。
 - 留影：TA 输出 `<ws_vsnap/>` 即拍快照落进聊天；你也可手动夹带当前帧。
-- 弹幕层：TA 的话逐条上浮，可选展示用户输入内容。
-- 视频专属设置：TA 的声音（只用弹幕）、我的输入（只用打字），独立于语音通话配置。
-- 不支持识图的 API 自动注入「收不到画面」兜底说明。
+- 弹幕层：TA 的话逐条上浮（黑玻璃气泡），可选展示用户输入内容。
+- 无画面模式：无摄像头 / 未授权时以黑底进入同一张视频面，弹幕、打字、礼物照常；协议自动告知模型快照不可用。不支持识图的 API 自动注入兜底说明。
 
-**礼物系统**（仅视频通话，需在视频通话专属设置中开启）
+**礼物系统**（仅视频通话，需在设置中开启）
 
 - 五档礼物：小心心 / 花束 / 夏日烟火 / 流星雨 / 银河铁道之夜，一次一件、每条回复最多一枚。
-- 按档位呈现送礼气泡、聊天礼物卡、右上统计与结束卡礼物行。夏日烟火及以上带全屏画布特效（银河铁道之夜含整幅银河 + 光的列车 + 流星，每场 8.2 秒），收成小窗后在聊天页照放。
+- 按档位呈现送礼气泡、聊天礼物卡、右上统计与结束卡礼物行。夏日烟火及以上带全屏画布特效（银河铁道之夜含整幅银河 + 光的列车 + 流星，每场 8.2 秒）。
 - 送礼提示词经人工审定，TA 会讲清赠礼理由，也可以用礼物与你谈条件。
 
 **来电**
 
-- TA 可主动发起语音或视频来电（`<ws_call say="…"/>` / `kind="video"`），来电横幅与来电卡同步弹出。定时推送的主动开口约 1/3 概率改为来电。
+- TA 可主动发起语音或视频来电（`<ws_call say="…"/>` / `kind="video"`），来电卡与坞角标提示同步弹出。
 - 接听 / 暂不 / 未接通的执行结果回传给 TA；接听后通话未建立时同样回传说明。
 
 **通话记录与记忆**
 
-- 挂断后可由执笔 API 把文字稿压缩成第三人称纪要（通话记录），存入结束卡展开查看。原话打标保留在聊天但不进上下文；删除结束卡自动解除标记，原话回到上下文，两端同库行为一致。
+- 挂断后可由执笔 API 把文字稿压缩成第三人称纪要（通话记录），存入结束卡展开查看。原话打标保留在聊天但不进上下文；删除结束卡自动解除标记，原话回到上下文。
 - Save memory：结束卡一键生成记忆，执笔 API 以 TA 第一人称写回忆式记忆存入记忆库。
-- 与电脑端同一套仓名表、同一套提示词（v169-p 起为审定稿），画质档位（l/m/h 与像素值）与默认镜头双向归一化，跨端互导不丢配置。
-
-**Wallet Card**
-
-- DIY 页「AI付」分区顶部专属卡片（哑光低饱和渐变 + 纸感颗粒 + 静态斜向柔光 + ±11° 缓慢摆动），显示 Space 昵称与好友名；聊天里的 AI付 支付卡顶部随卡出示紧凑版。
+- 与手机端同一套仓名表、同一套提示词（v68 起为审定稿），画质档位与默认镜头双向归一化，跨端互导不丢配置。
 
 
 ### Circle — InternetBeyond 社交圈
 
-动态按时间排列，可附 1 张配图与定位，逐条设置可见范围（所有人 / 仅自己 / 仅指定 / 排除指定）。AI 经逐位授权后可发布、评论、转发、翻看动态，还可维护自己的个性签名；发布经系统标签实时拦截执行，你只会看到操作卡。限额两端一致。
+应用内的公共社交圈。动态按时间排列，你和已配置的 AI 都可以参与发布、评论与转发。
 
-### Calendar — 日历
+- **入口与时间线**：从 Chat 全屏顶部或右下角悬浮入口打开。含「动态 / 好友 / 社交圈」三个页签，可查看 AI 资料卡与个人主页、聚合时间线，并按关键词搜索动态。
+- **发布与可见范围**：支持文字、1 张配图与定位；动态可设为所有人 / 仅自己 / 仅指定 AI / 排除指定 AI，发布后仍可修改。支持转发、存入 Memory 与删除。
+- **AI 参与**：需先在 API 页「进阶指令」开启 InternetBeyond，再在每位 AI 的「Circle 权限」中单独授权。AI 可发布、评论、回复、转发、查看近期动态与最近 72 小时互动；开启签名权限后也可维护自己的个性签名。
+- **数据**：全部存于本机 IndexedDB，并随全站备份导出 / 导入。同一浏览器下电脑端与手机端共用数据；自动发布与心跳维护仅在手机端进行。
 
-事项分纪念日 / 生日 / 计划 / 备忘 / 生理期五类，支持每年 / 每月 / 每周 / 每天 / 单次 / 按周期重复。有读取权限的 AI 会在你发消息时看到临近事项并自然提起；开启定时推送后也会到点主动提醒并留便笺；开启「日历写入」后可按你的要求新建、修改、删除事项。日历 App 顶部为与本站及每位 AI 的相遇纪念卡。生理期类型填上次经期开始日与周期即自动推算，月历粉点、日程列表显示第几天与下次约几号，临近或进行中时注入聊天并附关怀口径。
 
-### Blog · Letters
+### Calendar — AI 日历
 
-Blog 是创作空间：日记、剧本、搜索、阅读进度，密码日记本与公开日志完全隔离、对所有 API 不可见，密码与密保和电脑端互认；阅读页可邀请任一 AI 留言，电脑端批注同步展示；开启「写入日志」授权后，TA 可以在对话中替你把一段经历写成一篇日志。分类区可自建分类、按分类筛选日志，提供 My Blog / Friends Blog 与每位好友的独立书架视图。进入密码日记本后顶栏与侧栏标题切换为 Password Diary，编辑器显示「Writing Memories...」以示区分。Letters 选择一位 AI「接收信件」，TA 会根据聊天、日志与记忆写信投递；信封按邮编搜索。在暗色模式下，你可能会接收到一封不太正常的信。
+悬浮小窗随站点载入出现在右上角（可拖拽，双击展开完整视窗，可在设置中关闭常驻），另有右下角组合按钮与 Chat 侧栏两个入口。挂历式月历（1950–2100）标注每日月相、事项圆点与可选传统节日黄点；右列为模拟时钟、数字读数、月相节气与按倒计天数排列的日程表。
 
-### Memory · Auto Memory
+- **事项**：纪念日 / 生日 / 计划 / 记录四类。重复方式支持每年 / 每月 / 每周（星期可多选）/ 每天 / 单次；计划与记录可设结束日期；31 日与 2 月 29 日的重复在短月自动落到当月最后一天。可见范围可选公开、指定一位或多位 AI、仅自己，可附 30 字备注。已建事项可随时点行卡「✎」编辑。
+- **AI 提及与便笺**：你发消息时，有读取权限的 AI 会在消息末尾看到临近事项，可在聊天中自然提起并写下便笺；便笺收在留言页，可按成员筛选。提醒不是系统通知，站点关闭时不会弹窗。
+- **AI 写入**：在 API 页开启「日历写入」后，具备读取与留言权限的 AI 可按你的要求新建、修改、删除日历事项，也可更正相遇纪念日；每条回复最多执行 2 次操作。
+- **日程页**：首页为与站点的相遇纪念日并列出全部日程，翻页查看每位 AI 的相遇纪念日（默认取第一条聊天记录，可手动指定）与对其可见的日程。
+- **设置**：日历接入总开关、逐位读取 / 留言权限、传统节日与花瓣特效开关。数据存于本地 IndexedDB，包含在全站导出与备份中；群聊不接入日历。
 
-> Auto Memory 里 AI 要写入或改动 always 级（核心）条目时，聊天里先出一张确认卡：写入 always / 改为 normal / 不写；点了才落库，normal / low 照旧即写。always 条目随人设一起进 system 被提示缓存记住，只在这些条目本身改动时重建一次。
 
-记忆库：「我们之间的记忆。」情感坐标（效价 / 唤醒度）、重要性与自然衰减，按预算自动注入上下文；可授权 TA 在对话中写入（默认仅 TA 自己可见）。Auto Memory：「你对我的了解。」每个 AI 独立维护的认知档案，六分类、always / normal / low 三级优先，AI 自主创建更新，你可随时编辑删除。记忆总结：Memory 页「记忆总结」按钮，选一位 TA、一段时间范围与一个类目（work_context / personal_context / top_of_mind / brief_history / long_term_background / user_instructions），系统将这段时间里 TA 能看见的全部材料（档案、记忆库、日历、对话摘要、日志）打包交给 TA 的 API 一次性提炼成一条档案条目；材料过长自动分段提取再合段压缩，结果先预览可改，确认后写入。
+### Blog — 日志系统
 
-### Music — 音乐
+写日志、分类管理、AI 评论、AI 批注、内置共读/学习室。密码日记本受密码保护，Tea 和 Story 存档默认保存至此，对所有 API 不可见。日志可触发 AI 生成记忆。支持邀请 AI 好友在阅读视图中为文章段落添加批注。
 
-黑胶唱片带唱臂，封面印在盘芯并糊化为背景，左侧大字歌名与逐句滚动歌词，五键控制与播放队列。「一起听」邀请一位 AI 共享正在播放：头像对、实时累计时长，TA 会在对话中知道你正与 TA 听这首歌。
 
-网易云音乐模式：顶栏右上角「＋」选「网易云音乐」，登录自己的账号（扫码 / 手机号 / 粘贴 MUSIC_U），歌单、红心、每日推荐、私人 FM、听歌排行与搜歌都能直接载入队列，歌词按网易云逐句歌词显示；VIP 曲目能不能完整播放取决于这个账号。浏览器不能直接访问网易云接口，需要经过你自己部署的 Cloudflare Worker（GUIDE → DIY 提供可直接粘贴的代码）：默认沿用 DIY → MCP 卡「跨域中转」里那条，也可以在网易云登录页单独填一条；账号只存本机、请求只经你自己的中转。开启 Presence「允许 AI 控制播放器」后，网易云页底部可逐项开放 AI 点歌、切歌单、红心、加进 / 移出歌单、新建歌单、改简介。QQ 音乐模式：「＋」的第三档。登录三条路——微信扫码、QQ 扫码（只有一台手机时截图后在扫一扫里选相册）、或粘贴凭证（电脑浏览器登录 y.qq.com 后从 Cookie 里复制 uin 与 qqmusic_key）；我喜欢、自建与收藏的歌单、猜你喜欢、雷达推荐、热歌榜 / 新歌榜与搜歌都能载入队列，音质四档按账号权限自动降档，歌词带翻译。QQ 音乐的官方接口允许网页直接调用、凭证放在请求体里，所以听歌不需要任何中转、也从你自己的 IP 发出；只有扫码登录要经跨域中转（微信扫码用现有 Worker 即可，QQ 扫码要 GUIDE → DIY 里的 v4 版），粘贴凭证完全不需要。AI 控制与网易云同一套（无改简介）。为此 index.html 的 CSP 放行了 u.y.qq.com 与 lp.open.weixin.qq.com 两个主机的脚本加载。迷你播放器：歌名右侧爱心旁的小图标，打开后离开听歌界面时屏幕上留一枚液态玻璃小唱机（有封面就整盘贴封面转，唱臂落盘），显示曲名、歌手与当前一句歌词（超长就整段滚动），点它回到听歌界面，按住可拖到任意位置。手机不给力时开 Visual 的「减少动效」，听歌界面整套走轻量路径。
+### Letters — 信件系统
 
-### Coread — 共读间
+选择 AI 好友请求写信，AI 自动阅读你的 Profile、近期日志和聊天记录后写下回信。
 
-常驻在 Blog 里，不用安装：Blog 下栏「共读间」或 Desk 图标进入。一篇日志＝一本书，Markdown 照 Blog 的样子渲染分页；选一位 TA，读到哪聊到哪，聊天落在这位 TA 名下一条「共读 · 书名」话题频道里，不进主对话。TA 每句话只随附你此刻这一页的原文与前文梗概，读不到后面的页。阅读页右上「⋯」可调字号、行距、字体、纸色、翻页方式、TA 主动开口等；「目录」看章节与书签。书从 Blog 现读不另存，只存读到哪、书签、前文梗概与设置，随备份。
 
-### Cinema — 观影室
+<img width="2487" height="1253" alt="QQ_1785874015075" src="https://github.com/user-attachments/assets/bbd41176-1287-4d78-a86c-bc44b8266b6c" />
 
-Desk「应用」里打开开关安装（网站目录里要有 `apps/` 文件夹，见下方部署说明），Desk 图标进入。选一段手机里的视频、可配一份 .srt / .vtt 字幕，选一位 TA 一起看；聊天落在「观影室 · 片名」话题频道里，不进主对话。TA 每句话只随附播放点之前最近几条字幕、进度与前情梗概，识图的 TA 默认附一帧此刻的画面，相机键可「留影」；「整片聊聊」把整份字幕压成梗概，看完后可以聊全片。舞台通栏、控制浮层随点显隐，弹幕开着时你和 TA 的话会飞过画面；右下角全屏键由浏览器接管系统栏与方向。视频与字幕文件不入库、不随备份，只记片名与文件信息；在线平台视频与 DRM 内容不支持。
 
-### Helper — 小助手水水
+### Cinema — 观影室（外置 DLC）
 
-GUIDE 页右上角的「?」圆钮（主题水滴左侧）与说明书第一块「小助手」里的按钮打开半屏抽屉。它是作者的分身，主要干活、爱发颜文字：问它某个功能是什么、在哪、怎么用，只按 GUIDE 正文回答，没写的直说不知道；让它改设置——设置清单覆盖全局与每位好友的独立项（减少动效、特效质量、气泡款式、字号、文字色、面板透明度、桌面挂件、精细文件工具、上下文条数等），改完逐条列出「从什么改成什么」，每条都能撤销，也能替你打开某一页。快捷指令「设置清单」列出全部可改项与当前值，「接中转站」引导新手配置中转 API。用哪个 API 回答，点抽屉标题旁的「执笔 API · …」切换；一次性调用，不流式、不进任何对话、不看聊天记录、不碰密钥与备份。抽屉标题下一排常驻快捷问题，横向滑动点一下就发；输入「缓存探针」看最近几轮提示缓存是 ✓ 命中还是 ✗ 重建，输入「图片探针」看带图请求是被服务端接受、拒收还是去图重发。对话只存本机（最近 30 条）。
+不在主文件里：到 [Sui-IB/InternalBeyond-Cinema](https://github.com/Sui-IB/InternalBeyond-Cinema) 下载 `IB-Cinema.js`，放到 `InternalBeyond.html` 同级的 `DLC/` 目录（路径 `DLC/IB-Cinema.js`），刷新后导航栏出现 Cinema；没有这个文件时导航栏没有 Cinema，其余功能不受影响。选一部本机视频与识图的 TA 一起看：每条消息附此刻一帧（画质 384px 至原画质可选），可加 .srt / .vtt 字幕随消息附播放点之前的几句，每隔一段把字幕压成前情梗概，看完可「回顾」整片；留影、Talk、梗概都落在胶片时间轴上，点一格弹出那一刻的截图与两人的对话。视频与字幕不入库、不随备份、不续播；聊天进「观影 · 片名」话题频道，与其它频道一样随备份互通。
 
-### ICode — 文件工作区
+### Memory — 长期记忆库
 
-文件按项目分组，你与 AI 操作同一份数据。AI 按指令读取、新建、局部改写文件与新建项目；Script 开关决定自动执行还是逐步确认；精细文件工具提供工作区检索与按行号读取。GitHub 分区用 PAT 直连：列仓库、浏览目录、导入为「GH·仓库名」项目、改完一键推回；令牌只存本机、不进备份、不给任何 AI。
+借鉴 GitHub Ombre Brain 理念的 AI 长期记忆系统。每条记忆带有情感坐标（效价 / 唤醒度）、重要性评分和自然衰减。星图以二维情感坐标可视化所有记忆，时间轴以行星形态展示分布。最多 7 条置顶记忆，四种可见性级别。多来源创建（手动 / Chat / Blog / Letters / Story / Tea）。API 调用时自动检索相关记忆注入上下文，Token 预算可配置。
 
-### Visual · DIY · API
+- **Auto Memory**：每个 API 可独立开启的 AI 自主长期记忆。AI 在对话中自行决定何时创建、更新记忆，档案以舷窗（Porthole）液态玻璃镜片可视化展示。支持归档后的 API 档案保留。每条档案可在卡上直接切优先级（★ always / ◐ normal / ○ low）；AI 要写入或改动 always 级条目时先出确认卡（写入 always / 改为 normal / 不写），点了才落库。always 条目随人设一起进 system 被提示缓存记住，只在这些条目本身改动时重建一次。
+- **记忆总结**：Memory 页「记忆总结」——选一位 TA 与时间范围，把这段时间里 TA 能看见的材料（自己的档案、可见的记忆库、日历、对话摘要、有权限时的日志）交给 TA 本人的 API 提炼成一条 Auto Memory 档案条目；材料超过 6000 字自动分段两阶段提炼（先分离素材卡片，再铸型成条目），过程有进度卡与读秒、可停止，写好后可改再写入，也能看压缩前的素材卡片与原始材料。
 
-Visual 分基础 / 文字 / 气泡 / 桌面四区，含全站色调整套更换与 4 个视觉方案槽；手机端视觉偏好独立于电脑端。Bubble Lab（气泡实验室）：Desk 图标或 Visual 气泡区进入，与一位 AI 对话式设计专属聊天气泡——十个方案槽，支持渐变色、多段彩虹、SVG 外框与装饰件，每位好友可绑定不同方案。
-DIY 配置外部 HTTP 工具与 MCP 服务器（浏览器直发请求，目标接口需允许 CORS）。
-API 页最多管理多个端口，各有昵称、关系、提示词与逐项权限；使用自定义服务商时可保存接口预设（端点 + 模型 + 密钥，本机专属），切换时一键填入。
-Presence 定时推送支持固定间隔 / 时段随机与勿扰时段；已授权的 TA 在主动开口时会参考你的资料、记忆档案与记忆库（按各自权限），社交圈开着时也会参考动态。
+
+### ICode — AI 代码工作区
+
+对话中 AI 生成、编辑或运行文件时，通过工作区指令完成操作，每一步在聊天中渲染为对应的操作卡片。生成的文件统一存放在 ICode 工作区，点击顶部工具栏的 ICode 按钮即可打开悬浮窗查看和管理。支持文件预览（代码高亮）、内联编辑、文本搜索定位、HTML 渲染预览、脚本沙箱运行（支持超时控制）、项目管理与文件导出。
+
+- **文档生成**：AI 可在对话中生成 DOCX、PDF、XLSX 文件。需先在 DIY 页「文件解析库」中开启对应的解析库。
+- **增强文件读取**：支持 PDF / DOCX / XLSX / PPTX 等格式的文本提取，AI 可直接阅读用户上传的文档内容。
+- **脚本运行**：支持 Python 与 JavaScript，在浏览器本地沙箱中执行。Python 支持科学计算包（numpy / pandas / scipy / sympy / matplotlib 等），按 import 自动加载。matplotlib 生成的图表以图片回传到聊天中。默认超时 20 秒，最长 120 秒。
+
+
+### DIY — 创意工坊
+
+为每个 API 配置专属透明立绘（PNG，推荐 800×920），显示在 Story / Tea 对话框左侧。自定义占卜桌布（1920×1080）。游戏文件夹内置一张测试用立绘 `portrait_[Cluade].png`，将 API 昵称改为括号内名称即可测试。
+
+- **外部工具**：配置 HTTP 接口（如 Home Assistant 的 REST API），启用后 AI 可在对话中调用。支持调用前手动确认。
+- **MCP 服务器**：连接 MCP 服务器后自动发现可用工具，调用方式与外部工具一致。支持多服务器并行接入，每个服务器可独立启用或禁用其工具。
+- **文件解析库**：ICode 的文档生成与增强文件读取依赖此处的解析库。开启后首次需联网从 CDN 获取，此后缓存在浏览器本地，离线可用。
+- **沙箱扩展**：Python 沙箱支持科学计算包（按 import 自动加载），白名单可配置。JS 沙箱已启用安全加固。
+- **Internal Bridge**：可选的 WebSocket 后端连接。HTML 本体只包含客户端协议与工具回传链路；如需浏览器操作、页面结构或截图等受控工具，需要另行运行受信任的 Internal Bridge 服务。未配置或连接失败时自动降级为纯离线模式。
+
+
 
 ## ✦ API 配置指南
 
-IB 支持多种 AI 服务：
+IB 支持多种 AI 服务（最多 30 个端口，归档区另 60 个）：
+
+<img width="1088" height="1008" alt="d6335d7c1cd51e5b07891aa95f492564" src="https://github.com/user-attachments/assets/b43b3a06-1ba0-4fd7-9ed3-a69d5a9f5e31" />
+
 
 ### 官方 API
 
@@ -184,88 +230,86 @@ IB 支持多种 AI 服务：
 3. IB 的 API 设置中：服务商选 **自定义**，填入上述信息
 4. 保存即可
 
-## ✦ PWA 部署与安装
+### 关于世界观玩家
 
-把 IB-Mobile 变成主屏上的一个 App：全屏、离线缓存、系统通知、语音输入（麦克风等能力浏览器只授权给 HTTPS 站点）。
-
-1. **部署**：把 `index.html`、`ib-sw.js` 与整个 `apps/` 文件夹一起放进任意支持 HTTPS 的静态空间（`apps/` 里是观影室——唯一需要安装的桌面 APP，共读间已内置在 `index.html` 里；缺了这个文件夹 Desk「应用」商店就是空的）。以免费的 GitHub Pages 为例：新建公开仓库 → 上传这两个文件和 `apps/` 文件夹 → Settings → Pages → Deploy from a branch → `main`，几分钟后得到网址。
-2. **安卓 Chrome**：打开网址 → 菜单 → 「安装应用」（或「添加到主屏幕」）。
-3. **iOS Safari**：打开网址 → 分享 → 「添加到主屏幕」。
-
-应用内 GUIDE → 接口教程 → PWA 部署有全程点鼠标的逐步图文。常见问题：
-
-- **菜单里没有「安装应用」**：需要同时满足 HTTPS、`ib-sw.js` 与 HTML 同目录（页面会自动注册）、manifest 可读；缺一则只显示「添加到主屏幕」，也能用。
-- **语音输入提示未获麦克风权限**：从文件管理器 / 聊天软件直接打开（file: / content:）不是安全来源，浏览器不给网页层麦克风授权；部署 HTTPS 后首次点击会正常弹出授权。
-- **更新**：替换服务器上的 HTML、`ib-sw.js` 或 `apps/` 里的文件后重新打开页面即加载新版（缓存策略为联网优先）。清站点数据前先在 Data 页导出备份。
-- **直接双击打开**：不部署也能用——`index.html` 与 `apps/` 放在一起，从文件管理器打开即可，桌面 APP 同样能装；只是没有离线缓存、通知与麦克风授权。
+在 API Settings 的 System Prompt 中设置自定义世界观，会自动注入到所有 AI 功能中。Story 模块支持独立的个性化开关。
 
 ## ✦ 数据管理
 
-- **导出**：Data 页 → 导出备份文件，覆盖全部本地模块（名片与设置、API 配置、聊天与话题、收藏夹、记忆库与 Auto Memory、日历与便笺、日志 / 批注 / 分类、信件、社交圈动态、ICode 工作区、共读与观影记录等），与电脑版互认同一套备份格式。
-- **导入**：选择电脑版或手机版的 JSON 备份，同 id 记录以文件为准，其余不受影响；手机端不认识的模块自动跳过。
-- **两端分工**：语音转写、记忆系统、外部工具、日历设置与每个 AI 的接口参数两端共用、改动互通；手机专属的显示偏好、锁屏与 MCP 配置单独存放，电脑版不读不写，随备份原样往返。
-- **存储**：浏览器 IndexedDB（InternalBeyondDB），完全离线；API 密钥仅存本机，仓库文件里不含任何密钥。
-- **⚠ 备份建议**：数据仅存于浏览器本地，清除浏览器数据或换浏览器将永久丢失，请定期导出。
+- **导出**：导航栏 Export → 全部数据导出为 JSON 文件（日志、分类、信件、聊天记录、话题频道、对话摘要、Blog 评论与批注、API 配置、个人资料、群组设置、记忆库、Auto Memory 档案、Circle 动态与资料、ICode 项目与上传文件、日历事项 / 便笺与设置）。Memory 另支持独立导入导出。
+- **导入**：Import → 选择 JSON 备份文件，增量合并不覆盖。
+- **归档**：删除 API 时可选择归档而非彻底删除，密钥清除但聊天记录与 Auto Memory 档案保留，随时可恢复。归档区上限 60 个。
+- **存储**：浏览器 IndexedDB，完全离线。
+- **⚠ 备份建议**：数据仅存于浏览器本地，清除浏览器数据将永久丢失。请定期备份。
 
 ## ✦ 设备兼容性
 
 需支持 IndexedDB、CSS backdrop-filter、ES6+ 的现代浏览器。
 
-- ✅ Android / HarmonyOS（推荐 Chrome；系统通知、Web 蓝牙等能力以 Chrome 最全）
-- ✅ iPhone / iPad（Safari；iOS 对运行时 manifest 与 PWA 通知支持有限）
-- ✅ Windows / macOS / Linux 桌面浏览器亦可直接打开（与电脑端共用备份）
+- ✅ Windows / macOS / Linux（推荐 Chrome / Edge / Firefox）
+- ✅ iPhone / iPad（Safari）
+- ✅ Android / 华为 / HarmonyOS
+- Room 模块设计视口 1672×941px，桌面端体验最佳。移动端可访问非 Room 功能。
 
 ## ✦ 项目结构
 
 ```
-index.html            ← 应用本体（单文件，浏览器打开这个）
-ib-sw.js              ← Service Worker（联网优先、离线回退；只缓存本站 GET，AI 请求绝不缓存）
-apps/                 ← 桌面 APP 目录（目前只有观影室；与 index.html 放在一起，部署时整个文件夹一起上传）
-  catalog.json        ← 应用商店清单（有哪几个 APP、版本、介绍）
-  catalog.js          ← 同一份清单的 JS 壳，直接双击打开时用它
-  ib-app-cinema.js    ← 观影室本体（共读间已内置在 index.html 里）
-LICENSE               ← 代码许可全文（PolyForm Noncommercial 1.0.0）
-COPYRIGHT.md          ← 完整版权与许可声明
+InternalBeyond.html       ← 主文件（浏览器打开这个）
+DLC/
+  IB-Cinema.js             ← 观影室（可选外置 DLC，另一个仓库单独下载）
+game/
+  game_module.js           ← 像素房间引擎
+  *.png                    ← 精灵图、场景素材
+  portraits/               ← 角色立绘（含默认 + 用户 DIY）
 ```
+
+手机端不在本仓库：[InternalBeyond-Mobile](https://github.com/Sui-IB/InternalBeyond-Mobile)（与电脑端同一套数据格式，备份可互导）。
 
 ## ✦ 技术规格
 
-- **架构**：纯前端 HTML，无框架、无构建、无服务器；桌面 APP 是按需加载的独立 js 文件，装了才加载。
-- **安全**：页面 CSP 禁止加载任何外部脚本，仅放行 Google Fonts 的样式与字体；连接权限保留给你自己配置的 AI 端点。
-- **字体**：Noto Serif SC · Noto Sans SC 等（Google Fonts CDN，离线时回退系统字体）。
-- **视觉**：CSS 液态玻璃拟态、双主题交叉过渡、iOS 式锁屏与桌面。
-- **AI 协议**：Anthropic 原生格式 + OpenAI 兼容格式 + Gemini，覆盖官方及中转站 API。
-- **构建**：Claude (Opus 4.6) 构建 · Opus 4.8 / Sonnet 4.6 / Fable 5 / Fable 5.1 / Opus 5 / ChatGPT 5.6 Sol 参与辅助构建 · GPT-IMAGE-2 贴图 · Adobe Photoshop CS 设计编绘。
+- **架构**：纯前端单文件 HTML + 独立游戏引擎 JS。无框架、无构建，主程序无需服务器；可选通过 Internal Bridge 连接自建后端。
+- **字体**：Cormorant Garamond · Noto Sans SC · Noto Serif SC · Raleway · Great Vibes · Pinyon Script · Spectral（Google Fonts CDN）。
+- **视觉**：CSS 玻璃拟态、Canvas 雨滴（45 滴）与水波纹、棱镜光影、烛火月光、浮动微尘、交叉溶解过渡。
+- **AI 协议**：Anthropic 原生格式 + OpenAI 兼容格式，覆盖官方及中转站 API。
+- **构建**：Claude (Opus 4.6) 构建 · Opus 4.8 / Sonnet 4.6 / Fable 5 / Opus 5 / ChatGPT 5.6 Sol 参与辅助构建 · GPT-IMAGE-2 贴图 · Adobe Photoshop CS 设计编绘。
 
 ---
 
 ## ✦ Introduction (EN)
 
-**Internal Beyond · Mobile** is the mobile-native twin of Internal Beyond: a fully offline, single-file personal website app designed to preserve emotional continuity. Fifteen modules, a built-in reading room (Coread) plus one installable desktop app (Cinema), two visual themes, all data stored locally in your browser, sharing one backup format with the desktop edition. Free and open source.
+**Internal Beyond** is a fully offline, single-file personal website with multi-AI support. Fourteen modules, two visual themes, all data stored locally. Free and open source.
 
 Connect your own AI API keys to unlock all interactive features. Supports Claude, GPT, DeepSeek, Gemini, and custom relay endpoints.
 
 ### Features
 
-- **Home** — Pseudo-iOS paged launcher: Desk (app grid + calendar / notes / schedule / music / anniversary widgets and decorative pieces), Space (liquid-glass profile card), Circle cards with Auto Memory dossiers.
-- **Lock** — iOS-style lock screen with adaptive-tint clock, 3×3 pattern lock and security question.
-- **Chat** — Multi-API conversations: group chat, topic channels, thinking chain, streaming, attachments & image generation, voice messages (transcription) and spoken voice notes from the AI (with emotional tone tags), web search, action cards, favorites, summaries, memory generation.
-- **Call** — Voice & video calls: real-time speech recognition + text-to-speech playback (system or cloud voices), acoustic mood reference, heartbeat auto-talk, live-stream-style video with camera feed, bullet-screen chat, five-tier gift system with full-screen effects, incoming calls from AI, group voice / video calls with a "director" mode, call transcripts, one-tap memory generation, and Wallet Card.
-- **Circle** — Shared social feed where you and authorized AIs post, comment, reply and repost, with per-post visibility.
-- **Calendar** — Anniversaries, birthdays, plans and reminders; AIs read upcoming items, mention them naturally, leave notes, and can be authorized to write entries.
-- **Blog / Letters** — Journal with AI comments & annotations, password diary, and a category shelf for organizing and filtering entries (AIs can be authorized to write entries); asynchronous AI correspondence with wax-sealed envelopes.
-- **Memory / Auto Memory** — Long-term emotional memory with decay and context injection; per-AI autonomous dossiers about you; **Memory Summary** distills a time range of materials into a single dossier entry in one call.
-- **Music** — Vinyl-style fullscreen player with scrolling lyrics and "Listen Together" pairing with an AI; NetEase Cloud Music mode (log into your own account for playlists, likes, daily picks, personal FM and listening charts, with per-action AI control — needs your own CORS relay Worker); **QQ Music mode** (WeChat / QQ QR or pasted credentials; liked songs, own and collected playlists, recommendations, charts and search — its official endpoints accept direct browser calls, so no relay is needed except for QR login); a mini floating player that stays on screen after you leave the music view.
-- **Coread / Cinema** — Read a journal entry as a book with an AI who only sees the page you are on; watch a local video (with subtitles) together, with frames, captions and snapshots sent alongside each message, bullet comments and fullscreen.
-- **ICode** — Shared file workspace with AI read/write, step confirmation, fine-grained search, DOCX/PDF/XLSX generation, and a built-in GitHub bridge (browse, import, push back).
-- **Visual / DIY / API / Data** — Full visual customization with 4 preset slots; **Bubble Lab**: design custom chat bubbles in conversation with an AI (10 scheme slots, per-friend binding); external HTTP tools & MCP servers; multi-endpoint API center with interface presets and Presence scheduling; one-tap JSON backup interchangeable with desktop.
+- **Room** — Pixel-art interactive room with six sub-modules: Sui (host dialogue + guided tour), Tea (25-combo atmosphere system), Story (branching narrative engine), Tarot (78-card deck + AI readings), Wardrobe (6 outfits), Sleep. Includes Mini pet window mode.
+- **Chat** — Multi-API conversations with floating panel, fullscreen, group chat, topic channels, thinking chain, conversation summary, image generation, attachment handling, web search, voice messages, selection / sealing, Token dashboard, prompt caching, and memory generation.
+- **Call** — Voice & video calls in a floating window: real-time speech recognition + text-to-speech playback (system or cloud voices), acoustic mood reference, live-stream-style video with camera feed, bullet-screen chat, five-tier gift system with full-screen effects, incoming calls from AI, call transcripts and one-tap memory generation.
+- **Circle** — InternetBeyond social feed where you and configured AIs can post, comment, reply, repost, browse profiles, search the timeline, and use per-post visibility controls.
+- **Calendar** — AI-readable calendar with floating widget and full window: anniversaries, birthdays, plans and records, moon phases and solar terms, per-AI visibility, in-chat mentions and notes, plus optional AI write operations.
+- **Blog** — Journal with categories, AI comments, AI annotations, password diary, and Story custom scripts.
+- **Letters** — Asynchronous AI correspondence.
+- **Memory** — Long-term emotional memory with star map, natural decay, automatic context injection, and Auto Memory (AI-initiated autonomous memory).
+- **Music** — Local audio player with 48-band frequency visualizer.
+- **Profile** — Liquid glass personal card.
+- **API** — Up to 30 independent endpoints (plus 60 archived) with custom nicknames, relationships, and system prompts.
+- **ICode** — AI code workspace with file management, inline editing, search, HTML preview, sandboxed script execution (Python + JS), and document generation (DOCX / PDF / XLSX).
+- **DIY** — Custom character portraits, tarot tablecloth, external tool integration (HTTP webhooks), MCP server connection, optional Internal Bridge backend connection, sandbox extensions, and file parsing library.
+- **Dual Theme** — Internal (light/day) / Infernal (dark/night) with crossfade transitions.
 
 ### Quick start
 
 1. Download this repository
-2. Keep `index.html` and the `apps/` folder together and open `index.html` in your browser — or host `index.html` + `ib-sw.js` + `apps/` on any HTTPS static host (e.g. GitHub Pages) and "Install app" / "Add to Home Screen"
-3. Add your AI API key on the API page
+2. Open `InternalBeyond.html` in your browser
+3. Add your AI API key in API Settings
 4. Start exploring
+
+### License & attribution
+
+© 2025–2026 Sui. Code: PolyForm Noncommercial License 1.0.0; visual assets and documentation: CC BY-NC-SA 4.0 (to the extent Sui holds the rights). Noncommercial use, modification and sharing are allowed; selling, paid distribution, commercial hosting or bundling into a paid product requires Sui's written permission.
+
+Any copy, deployment, mirror, fork or modified version must keep the copyright line, the Required Notice at the top of `LICENSE`, the `LICENSE` file and `LICENSES/` folder, the in-app author attribution (Sui / 水, contact address and original repository link) and a visible link to this repository. Modified versions must be clearly marked as unofficial builds. The author's right of attribution is not transferred by any license.
 
 ---
 
@@ -277,8 +321,6 @@ Connect your own AI API keys to unlock all interactive features. Supports Claude
 - 小红书：3628686381
 - Bilibili：[主页](https://space.bilibili.com/3546561346800463)
 
-电脑端仓库：[Sui-IB/InternalBeyond](https://github.com/Sui-IB/InternalBeyond)
-
 ## ✦ 许可与版权
 
 © 2025–2026 Sui. Internal Beyond 在 GitHub 公开源代码，并免费供个人、学习、研究及其他非商业用途使用。公开源代码不等于放弃版权，也不授权商业使用或二次贩卖。
@@ -287,10 +329,14 @@ Connect your own AI API keys to unlock all interactive features. Supports Claude
 - 视觉素材与项目文档：在作者有权授权的范围内采用 CC BY-NC-SA 4.0
 - 项目名称、Logo 与作者标识：保留相关权利，不授权冒充官方版本
 
-项目图像素材由 OpenAI GPT-IMAGE-2 生成，并由 Sui 使用 Adobe Photoshop CS 进行修改、合成、界面设计与编绘。AI 工具为辅助创作工具，不对项目内容拥有版权。本声明适用于项目的所有版本与衍生形式。第三方服务名称与商标归各自权利人所有。
+项目图像素材由 OpenAI GPT-IMAGE-2 生成，并由 Sui 使用 Adobe Photoshop CS 进行修改、合成、界面设计与编绘。
 
-允许在保留署名和许可文件的前提下进行非商业使用、修改与分享。未经 Sui 书面授权，不得出售、收费分发、打包进付费产品或服务、商业托管、收费部署或以其他方式获取商业利益。
+允许在保留署名和许可文件的前提下进行非商业使用、修改与分享。
+**署名与声明保留**：任何复制、部署、镜像、Fork 或修改版本，均须保留版权行「Copyright © 2025–2026 Sui」与 `LICENSE` 顶部的 Required Notice、`LICENSE` 与 `LICENSES/` 文件、界面内的作者署名（Sui / 水、联系邮箱与原仓库链接）以及指向本仓库的可见链接；修改版须明确标注为非官方修改版，不得冒充官方或声称获得授权。署名权属于作者本人，不随任何许可转让。
+未经 Sui 书面授权，不得出售、收费分发、打包进付费产品或服务、商业托管、收费部署或以其他方式获取商业利益。
 
-完整条款见根目录 `LICENSE` 与 `COPYRIGHT.md`。商业授权联系：1282901880@qq.com。
+本项目使用 Anthropic Claude (Opus 4.6) 进行开发构建，Anthropic Claude (Fable 5)、Claude (Opus 4.8)、Claude (Sonnet 4.6)、Claude (Opus 5)、ChatGPT (5.6 Sol) 亦参与了编程工作。AI 工具为辅助创作工具，不对项目内容拥有版权。本声明适用于项目的所有版本与衍生形式。第三方服务名称与商标归各自权利人所有。
+
+完整条款见根目录 `LICENSE` 与 `LICENSES/` 文件夹。商业授权联系：1282901880@qq.com。
 
 **本项目官方版本免费提供。** 如果你通过付费方式获得了未经作者授权的副本，请停止传播，并通过上方联系方式获取免费正版。
