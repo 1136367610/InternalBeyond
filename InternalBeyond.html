@@ -12650,12 +12650,12 @@ function _ensureQuoteBtn(el){
 var _meSt=null;
 function _meOv(){var ov=document.getElementById('msgedit-dialog-overlay');if(ov)return ov;ov=document.createElement('div');ov.className='group-dialog-overlay';ov.id='msgedit-dialog-overlay';
   ov.innerHTML='<div class="group-dialog"><h3 id="me-title">Edit Message</h3>'
-   +'<div class="me-add"><label>From</label><div class="me-chips" id="me-role"><button type="button" class="me-chip on" data-r="assistant">TA</button><button type="button" class="me-chip" data-r="user">Me</button></div></div>'
-   +'<div class="me-add" id="me-who-g"><label>Member</label><select id="me-who"></select></div>'
-   +'<div class="me-add"><label>Time <span id="me-day"></span></label><input type="text" id="me-time" placeholder="HH:MM" maxlength="5" autocomplete="off"></div>'
-   +'<label>Content</label><textarea id="me-ta" rows="7" placeholder="Type the message…"></textarea>'
+   +'<div class="me-add"><label>发送者</label><div class="me-chips" id="me-role"><button type="button" class="me-chip on" data-r="assistant">TA</button><button type="button" class="me-chip" data-r="user">我</button></div></div>'
+   +'<div class="me-add" id="me-who-g"><label>成员</label><select id="me-who"></select></div>'
+   +'<div class="me-add"><label>时间 <span id="me-day"></span></label><input type="text" id="me-time" placeholder="HH:MM" maxlength="5" autocomplete="off"></div>'
+   +'<label>内容</label><textarea id="me-ta" rows="7" placeholder="输入消息…"></textarea>'
    +'<div id="me-hint"></div>'
-   +'<div class="group-dialog-actions"><button class="btn" id="me-cancel">Cancel</button><button class="btn btn-primary" id="me-save">Save</button></div></div>';
+   +'<div class="group-dialog-actions"><button class="btn" id="me-cancel">取消</button><button class="btn btn-primary" id="me-save">保存</button></div></div>';/* v130：除标题外全部中文 */
   document.body.appendChild(ov);
   ov.addEventListener('click',function(e){if(e.target===ov)_meClose()});
   document.getElementById('me-cancel').onclick=function(){_meClose()};
@@ -12666,10 +12666,10 @@ function _meClose(){_meSt=null;var ov=document.getElementById('msgedit-dialog-ov
 function _meCan(){if(!activeFriendId){toast('请先选择一个聊天对象');return false}if(typeof _chatSendingFor!=='undefined'&&_chatSendingFor.has(activeFriendId)){toast('请等待当前回复完成后再改');return false}return true}
 async function editChatMessage(id){if(!_meCan())return;var m=null;try{m=await dbGet('chatMessages',id)}catch(e){}if(!m){toast('找不到这条消息');return}if(m.gift||m.callEnd||m.mark){toast('这类消息不能改');return}
   var ov=_meOv();ov.classList.add('edit');ov.classList.remove('add');_meSt={mode:'edit',m:m};
-  document.getElementById('me-title').textContent='Edit Message';document.getElementById('me-ta').value=String(m.content||'');document.getElementById('me-hint').textContent='Only the text changes; time, cards and attachments stay. The next reply rebuilds the prompt cache once.';
+  document.getElementById('me-title').textContent='Edit Message';document.getElementById('me-ta').value=String(m.content||'');document.getElementById('me-hint').textContent='只改文字；时间、卡片与附件不变。下一条回复重建一次提示缓存。';
   ov.classList.add('show');setTimeout(function(){try{document.getElementById('me-ta').focus()}catch(e){}},60)}
-async function addChatMessage(){if(!_meCan())return;var ids=[..._chatSelectedIds];if(ids.length>1){toast('添加消息只能选一条作为位置');return}
-  var anchor=null;if(ids.length){try{anchor=await dbGet('chatMessages',ids[0])}catch(e){}}
+async function addChatMessage(){if(!_meCan())return;var ids=[..._chatSelectedIds];
+  var anchor=null;for(var ii=0;ii<ids.length;ii++){try{var mm=await dbGet('chatMessages',ids[ii]);if(mm&&(!anchor||(mm.timestamp||0)>=(anchor.timestamp||0)))anchor=mm}catch(e){}}/* v130：多选时锚点取时间最晚那条，插在它之后 */
   var grp=String(activeFriendId).indexOf('group_')===0,group=null;if(grp){try{group=(await loadGroups()).find(function(g){return g.id===activeFriendId})||null}catch(e){}}
   var ov=_meOv();ov.classList.add('add');ov.classList.remove('edit');_meSt={mode:'add',anchor:anchor,grp:grp,group:group};
   document.getElementById('me-title').textContent='Add Message';document.getElementById('me-ta').value='';
@@ -12679,7 +12679,7 @@ async function addChatMessage(){if(!_meCan())return;var ids=[..._chatSelectedIds
   ov.querySelectorAll('.me-chip').forEach(function(x){x.classList.toggle('on',x.dataset.r==='assistant')});
   var who=document.getElementById('me-who'),g=document.getElementById('me-who-g');
   if(grp&&group){who.innerHTML=(group.members||[]).map(function(mid){var c=apiConfigs.find(function(a){return a.id===mid})||archivedConfigs.find(function(a){return a.id===mid});return c?'<option value="'+esc(mid)+'">'+esc(c.nickname||c.model)+'</option>':''}).join('');g.style.display=''}else g.style.display='none';
-  document.getElementById('me-hint').textContent=anchor?'Inserted right after the selected message. The next reply rebuilds the prompt cache once.':'Appended at the end of this conversation.';
+  document.getElementById('me-hint').textContent=anchor?'插在选中那条之后（多选时插在最晚那条之后）。下一条回复重建一次提示缓存。':'接在这段对话的最后。';
   ov.classList.add('show');setTimeout(function(){try{document.getElementById('me-ta').focus()}catch(e){}},60)}
 async function _meInval(ts){try{var key='sum_'+(activeThreadId||activeFriendId);var s=await dbGet('chatSummaries',key);if(s&&Number(s.coveredUpTo||0)>=ts)await dbDelete('chatSummaries',key)}catch(e){}}
 async function _meSave(){var st=_meSt;if(!st)return;var txt=String(document.getElementById('me-ta').value||'').trim();if(!txt){toast('内容不能为空');return}
